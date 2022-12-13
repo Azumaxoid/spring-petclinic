@@ -17,11 +17,11 @@ package org.springframework.samples.petclinic.owner;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.samples.petclinic.model.BaseEntity;
 
@@ -41,6 +41,14 @@ public class Visit extends BaseEntity {
 
 	@NotEmpty
 	private String description;
+
+	@Column(name = "visited_timestamp")
+	private Long visitedTimestamp;
+
+	@ManyToOne
+	@JoinColumn(name = "pet_id")
+	@JsonIgnoreProperties("visit")
+	private Pet pet;
 
 	/**
 	 * Creates a new instance of Visit for the current date
@@ -63,6 +71,22 @@ public class Visit extends BaseEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Pet getPet() {
+		return this.pet;
+	}
+
+	public void setPet(Pet pet) {
+		this.pet = pet;
+	}
+
+	public Long getVisitedTimestamp() {
+		return this.visitedTimestamp;
+	}
+
+	public void setVisitedTimestamp(Long visitedTimestamp) {
+		this.visitedTimestamp = visitedTimestamp;
 	}
 
 }
