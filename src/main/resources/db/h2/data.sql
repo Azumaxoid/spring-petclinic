@@ -47,7 +47,14 @@ INSERT INTO pets VALUES (default, 'Freddy', '2010-03-09', 5, 9);
 INSERT INTO pets VALUES (default, 'Lucky', '2010-06-24', 2, 10);
 INSERT INTO pets VALUES (default, 'Sly', '2012-06-08', 1, 10);
 
-INSERT INTO visits VALUES (default, 7, '2013-01-01', 'rabies shot');
-INSERT INTO visits VALUES (default, 8, '2013-01-02', 'rabies shot');
-INSERT INTO visits VALUES (default, 8, '2013-01-03', 'neutered');
-INSERT INTO visits VALUES (default, 7, '2013-01-04', 'spayed');
+INSERT INTO visits VALUES (default, 7, '2022-12-10', 1670651483189, 'rabies shot');
+INSERT INTO visits VALUES (default, 8, '2022-12-10', -1, 'rabies shot');
+INSERT INTO visits VALUES (default, 8, '2022-12-10', -1, 'neutered');
+INSERT INTO visits VALUES (default, 7, '2022-12-12', 1670651483189, 'rabies shot');
+INSERT INTO visits VALUES (default, 8, '2022-12-12', -1, 'rabies shot');
+INSERT INTO visits VALUES (default, 8, '2022-12-12', -1, 'neutered');
+INSERT INTO visits VALUES (default, 8, '2022-12-12', -1, 'rabies shot');
+INSERT INTO visits VALUES (default, 8, '2022-12-12', -1, 'neutered');
+INSERT INTO visits VALUES (default, 8, '2022-01-02', -1, 'rabies shot');
+INSERT INTO visits VALUES (default, 8, '2013-01-03', -1, 'neutered');
+INSERT INTO visits VALUES (default, 7, '2013-01-04', -1, 'spayed');

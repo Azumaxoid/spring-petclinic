@@ -30,6 +30,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.samples.petclinic.model.NamedEntity;
 
@@ -55,7 +58,13 @@ public class Pet extends NamedEntity {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "pet_id")
 	@OrderBy("visit_date ASC")
+	@JsonIgnoreProperties("pet")
 	private Set<Visit> visits = new LinkedHashSet<>();
+
+	@ManyToOne
+	@JoinColumn(name = "owner_id")
+	@JsonIgnoreProperties("pet")
+	private Owner owner;
 
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
@@ -80,5 +89,9 @@ public class Pet extends NamedEntity {
 	public void addVisit(Visit visit) {
 		getVisits().add(visit);
 	}
+
+	public void setOwner(Owner owner ) { this.owner = owner; }
+
+	public Owner getOwner() { return this.owner; }
 
 }
