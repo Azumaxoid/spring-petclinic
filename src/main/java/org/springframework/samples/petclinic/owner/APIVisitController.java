@@ -69,8 +69,8 @@ class APIVisitController {
 	 * @return Pet
 	 */
 	@ModelAttribute("visit")
-	public Visit loadPetWithVisit(@PathVariable(name = "ownerId", required = false) Integer ownerId, @PathVariable(name = "petId", required = false) Integer petId,
-			Map<String, Object> model) {
+	public Visit loadPetWithVisit(@PathVariable(name = "ownerId", required = false) Integer ownerId,
+			@PathVariable(name = "petId", required = false) Integer petId, Map<String, Object> model) {
 		if (ownerId == null || petId == null) {
 			return new Visit();
 		}
@@ -81,12 +81,12 @@ class APIVisitController {
 		model.put("owner", owner);
 
 		Optional<Visit> visit = owner.getPet(petId).getVisits().stream().findFirst();
-		return visit.orElseGet(()->new Visit());
+		return visit.orElseGet(() -> new Visit());
 	}
 
 	@ModelAttribute("visit")
 	public Visit loadPetWithVisit(@PathVariable(name = "visitId", required = false) Integer visitId,
-								  Map<String, Object> model) {
+			Map<String, Object> model) {
 		if (visitId == null) {
 			return new Visit();
 		}
@@ -96,7 +96,8 @@ class APIVisitController {
 	}
 
 	@GetMapping("/visits")
-	public List<Visit> processCreationForm(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "false") String showAll) {
+	public List<Visit> processCreationForm(@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "false") String showAll) {
 		// find owners by last name
 		List<Visit> petResults = findVisits(page, showAll == "true");
 		System.out.println(String.valueOf(petResults.size()));
@@ -123,8 +124,8 @@ class APIVisitController {
 	// Spring MVC calls method loadPetWithVisit(...) before processNewVisitForm is
 	// called
 	@PostMapping("/owners/{ownerId}/pets/{petId}/visits/new")
-	public Visit processNewVisitForm(@ModelAttribute Owner owner, @PathVariable int petId, @RequestBody @Valid Visit visit,
-			BindingResult result) {
+	public Visit processNewVisitForm(@ModelAttribute Owner owner, @PathVariable int petId,
+			@RequestBody @Valid Visit visit, BindingResult result) {
 		if (result.hasErrors()) {
 			throw new RuntimeException(result.getAllErrors().toString());
 		}
@@ -137,8 +138,7 @@ class APIVisitController {
 	// Spring MVC calls method loadPetWithVisit(...) before processNewVisitForm is
 	// called2
 	@PostMapping("/visits/{visitId}/edit")
-	public Visit processEditVisit(@PathVariable int visitId, @RequestBody @Valid Visit visit,
-									 BindingResult result) {
+	public Visit processEditVisit(@PathVariable int visitId, @RequestBody @Valid Visit visit, BindingResult result) {
 		if (result.hasErrors()) {
 			throw new RuntimeException(result.getAllErrors().toString());
 		}
@@ -147,4 +147,5 @@ class APIVisitController {
 		this.visits.save(visit);
 		return visit;
 	}
+
 }

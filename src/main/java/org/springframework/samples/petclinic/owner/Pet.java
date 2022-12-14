@@ -90,8 +90,12 @@ public class Pet extends NamedEntity {
 		getVisits().add(visit);
 	}
 
-	public void setOwner(Owner owner ) { this.owner = owner; }
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
 
-	public Owner getOwner() { return this.owner; }
+	public Owner getOwner() {
+		return this.owner;
+	}
 
 }
