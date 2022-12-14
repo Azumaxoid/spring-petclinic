@@ -75,7 +75,6 @@ class APIPetController {
 		dataBinder.setValidator(new PetValidator());
 	}
 
-
 	@GetMapping("/pets")
 	public Page<Pet> processCreationForm(@RequestParam(defaultValue = "1") int page) {
 		// find owners by last name
